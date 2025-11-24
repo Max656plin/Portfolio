@@ -2,7 +2,7 @@
 
 **Alumno:** Máximo Casado Giner  
 **Asignatura:** Diseño de Interfaces Web  
-**Tema:** 07-08 - Integración Avanzada de Multimedia
+**Tema:** 07-08 - Integración Avanzada de Multimedia (SIN AUDIO)
 
 ---
 
