@@ -1,419 +1,493 @@
-/* Reset y configuración base */
+/* ============================================
+   VARIABLES Y CONFIGURACIÓN BASE
+   ============================================ */
+:root {
+    --primary-color: #1e40af;
+    --secondary-color: #6366f1;
+    --dark-color: #1e293b;
+    --light-color: #f8fafc;
+    --transition: all 0.3s ease;
+}
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
-    font-family: "Arial", sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     line-height: 1.6;
     color: #333;
-    background-color: #f5f5f5;
+    padding-top: 76px; /* Espacio para navbar fijo */
 }
 
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
+/* ============================================
+   BOTÓN FLOTANTE CONTROL DE AUDIO
+   ============================================ */
+.btn-audio-control {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    z-index: 1000;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    transition: var(--transition);
+    animation: pulse 2s infinite;
 }
 
-/* Header */
-header {
-    background: linear-gradient(135deg, #4A90E2, #357ABD);
-    color: rgb(255, 255, 255);
-    padding: 20px 0;
+.btn-audio-control:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+}
+
+@keyframes pulse {
+    0%, 100% {
+        box-shadow: 0 4px 15px rgba(30, 64, 175, 0.4);
+    }
+    50% {
+        box-shadow: 0 4px 25px rgba(30, 64, 175, 0.7);
+    }
+}
+
+/* ============================================
+   NAVBAR PERSONALIZADO
+   ============================================ */
+#mainNav {
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    transition: var(--transition);
 }
 
-.header-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
+#mainNav.navbar-shrink {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+}
+
+.navbar-brand {
+    font-size: 1.3rem;
+    font-weight: 700;
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
+    transition: var(--transition);
 }
 
-.profile-section {
-    margin-right: 20px;
+.navbar-brand:hover {
+    transform: translateY(-2px);
 }
 
-.logo {
-    width: 200x;
-    height: 200px;
-    float: left;
-    box-shadow: 0 4px 15px rgba(125, 151, 182, 0.3);
-}
-
-.title-section {
-    flex: 1;
-    min-width: 250px;
-}
-
-.title-section h1 {
-    font-size: 2.5rem;
-    font-weight: bold;
-    margin-bottom: 5px;
-}
-
-.subtitle {
-    font-size: 1.1rem;
-    opacity: 0.9;
-    margin: 0;
-}
-
-.main-nav ul {
-    list-style: none;
-    display: flex;
-    gap: 20px;
-}
-
-.main-nav a {
-    color: white;
-    text-decoration: none;
-    padding: 10px 20px;
-    border: 2px solid rgba(255, 255, 255, 0.3);
-    border-radius: 5px;
-    transition: all 0.3s ease;
+.nav-link {
     font-weight: 500;
+    padding: 0.5rem 1rem !important;
+    transition: var(--transition);
+    position: relative;
 }
 
-.main-nav a:hover {
-    background-color: rgba(255, 255, 255, 0.2);
-    border-color: white;
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: white;
+    transition: var(--transition);
+    transform: translateX(-50%);
 }
 
-/* Main content */
-main {
-    padding: 0;
+.nav-link:hover::after {
+    width: 80%;
 }
 
-/* Sección Sobre Mi */
-#sobre-mi {
-    background-color: white;
-    padding: 60px 0;
-    margin: 40px 0;
-    border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+/* ============================================
+   HERO SECTION (MASTHEAD)
+   ============================================ */
+.masthead {
+    padding-top: 100px;
+    padding-bottom: 100px;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    position: relative;
+    overflow: hidden;
 }
 
-.about-content {
-    display: flex;
-    align-items: center;
-    gap: 40px;
+.masthead::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="2" fill="rgba(255,255,255,0.1)"/></svg>');
+    opacity: 0.5;
 }
 
-.about-icon {
-    flex-shrink: 0;
-}
-
-.profile-image {
-    width: 200px;
-    height: 200px;
-    border-radius: 0%;
+.masthead-avatar {
+    transition: var(--transition);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
     object-fit: cover;
-    box-shadow: 0 4px 15px rgba(74, 144, 226, 0.3);
 }
 
-.about-text {
-    flex: 1;
+.masthead-avatar:hover {
+    transform: scale(1.05) rotate(2deg);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
 }
 
-.about-text h2 {
-    font-size: 2.2rem;
+.masthead-heading {
+    font-size: 3rem;
+    font-weight: 700;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.masthead-subheading {
+    font-size: 1.3rem;
+    font-weight: 300;
+}
+
+/* Divider personalizado */
+.divider-custom {
+    margin: 2rem 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.divider-custom .divider-custom-line {
+    width: 100%;
+    max-width: 7rem;
+    height: 0.25rem;
+    background-color: #2c3e50;
+    border-radius: 1rem;
+}
+
+.divider-custom .divider-custom-icon {
     color: #2c3e50;
-    margin-bottom: 20px;
+    font-size: 2rem;
+    padding: 0 1rem;
 }
 
-.about-description {
-    background-color: #4A90E2;
-    color: white;
-    padding: 25px;
-    border-radius: 10px;
-    font-size: 1.1rem;
-    line-height: 1.7;
-}
-
-.about-description p {
-    margin-bottom: 15px;
-}
-
-.about-description p:last-child {
-    margin-bottom: 0;
-}
-
-/* Sección Proyectos */
-#proyectos {
-    padding: 60px 0;
-}
-
-#proyectos h2 {
-    font-size: 2.2rem;
-    color: #2c3e50;
-    margin-bottom: 30px;
-    text-align: left;
-}
-
-.table-container {
+.divider-custom.divider-light .divider-custom-line {
     background-color: white;
+}
+
+.divider-custom.divider-light .divider-custom-icon {
+    color: white;
+}
+
+/* ============================================
+   SECCIONES GENERALES
+   ============================================ */
+.page-section {
+    padding: 80px 0;
+}
+
+.page-section-heading {
+    font-size: 2.5rem;
+    font-weight: 700;
+    position: relative;
+    display: inline-block;
+}
+
+/* ============================================
+   SECCIÓN SOBRE MÍ
+   ============================================ */
+.profile-image {
+    border: 5px solid var(--primary-color);
+    transition: var(--transition);
+}
+
+.profile-image:hover {
+    transform: scale(1.05);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+}
+
+/* Animación para elemento hidden */
+#habilidadesOcultas {
+    animation: slideDown 0.5s ease;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ============================================
+   TABLA DE PROYECTOS
+   ============================================ */
+.table {
     border-radius: 10px;
     overflow: hidden;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
-.projects-table {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-.projects-table th {
-    background-color: #4A90E2;
-    color: white;
-    padding: 20px;
-    text-align: left;
+.table thead {
     font-weight: 600;
-    font-size: 1.1rem;
 }
 
-.projects-table td {
-    padding: 20px;
-    border-bottom: 1px solid #eee;
-    font-size: 1rem;
+.table tbody tr {
+    transition: var(--transition);
 }
 
-.projects-table tr:last-child td {
-    border-bottom: none;
+.table tbody tr:hover {
+    transform: scale(1.02);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
-.projects-table tr:hover {
-    background-color: #f8f9fa;
+/* ============================================
+   SECCIÓN CONTACTO
+   ============================================ */
+.contact-item {
+    padding: 1rem;
+    border-radius: 8px;
+    transition: var(--transition);
 }
 
-.projects-table a {
-    color: #4A90E2;
-    text-decoration: none;
+.contact-item:hover {
+    background-color: rgba(30, 64, 175, 0.05);
+    transform: translateX(5px);
+}
+
+.contact-item a {
+    color: var(--dark-color);
     font-weight: 500;
-    transition: color 0.3s ease;
+    transition: var(--transition);
 }
 
-.projects-table a:hover {
-    color: #357ABD;
-    text-decoration: underline;
+.contact-item a:hover {
+    color: var(--primary-color);
 }
 
-/* Sección Contacto */
-#contacto {
-    padding: 60px 0;
-    background-color: white;
-    margin: 40px 0;
-    border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+/* Video personalizado */
+video {
+    border: 3px solid var(--primary-color);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
 }
 
-.contact-wrapper {
-    display: flex;
-    gap: 40px;
-    align-items: flex-start;
+#btnPlayVideo {
+    transition: var(--transition);
 }
 
-.contact-info {
-    flex: 1;
+#btnPlayVideo:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(34, 197, 94, 0.4);
 }
 
-.contact-info h2 {
-    font-size: 2.2rem;
-    color: #2c3e50;
-    margin-bottom: 20px;
-}
-
-.contact-form-container {
-    flex: 1;
-    background: linear-gradient(135deg, #4A90E2, #357ABD);
-    padding: 40px;
+/* ============================================
+   CARDS PERSONALIZADAS
+   ============================================ */
+.card {
     border-radius: 15px;
-    box-shadow: 0 8px 25px rgba(74, 144, 226, 0.3);
+    transition: var(--transition);
 }
 
-.contact-form {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15) !important;
 }
 
-.form-group {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-}
-
-.form-group label {
-    color: white;
-    font-weight: 500;
-    font-size: 1rem;
-}
-
-.form-group input[type="text"],
-.form-group input[type="email"] {
-    padding: 12px;
-    border: none;
-    border-radius: 5px;
-    font-size: 1rem;
-    background-color: white;
-    transition: box-shadow 0.3s ease;
-}
-
-.form-group input[type="text"]:focus,
-.form-group input[type="email"]:focus {
-    outline: none;
-    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.3);
-}
-
-.checkbox-group {
-    flex-direction: row !important;
-    align-items: center;
-    gap: 10px !important;
-}
-
-.checkbox-group input[type="checkbox"] {
-    width: 18px;
-    height: 18px;
-    accent-color: white;
-}
-
-.checkbox-group label {
-    margin: 0;
-    cursor: pointer;
-}
-
-.submit-btn {
-    background-color: rgba(255, 255, 255, 0.2);
-    color: white;
-    border: 2px solid white;
-    padding: 12px 30px;
-    border-radius: 5px;
-    font-size: 1rem;
+.card-header {
+    border-radius: 15px 15px 0 0 !important;
     font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    margin-top: 10px;
 }
 
-.submit-btn:hover {
-    background-color: white;
-    color: #4A90E2;
+/* ============================================
+   FORMULARIO
+   ============================================ */
+.form-control {
+    border-radius: 8px;
+    border: 2px solid #e2e8f0;
+    padding: 0.75rem;
+    transition: var(--transition);
 }
 
-/* Footer */
-footer {
-    background-color: #4A90E2;
-    color: white;
-    text-align: center;
-    padding: 30px 0;
-    margin-top: 40px;
+.form-control:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.2rem rgba(30, 64, 175, 0.25);
+    transform: translateY(-2px);
 }
 
-footer p {
-    font-size: 1rem;
-    margin: 0;
+/* ============================================
+   BOTONES PERSONALIZADOS
+   ============================================ */
+.btn {
+    border-radius: 8px;
+    padding: 0.75rem 1.5rem;
+    font-weight: 600;
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
 }
 
-/* Media Queries - Responsive */
-@media screen and (max-width: 600px) {
-    /* Header responsive */
-    .header-container {
-        flex-direction: column;
-        text-align: center;
-        gap: 20px;
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.btn:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* ============================================
+   MODAL PERSONALIZADO
+   ============================================ */
+.modal-content {
+    border-radius: 15px;
+    border: none;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+.modal-header {
+    border-radius: 15px 15px 0 0;
+}
+
+/* ============================================
+   ANIMACIONES Y TRANSICIONES
+   ============================================ */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
     }
-    
-    .profile-section {
-        margin-right: 0;
+    to {
+        opacity: 1;
+        transform: translateY(0);
     }
-    
-    .title-section h1 {
+}
+
+.fade-in {
+    animation: fadeIn 0.6s ease;
+}
+
+/* Animación de hover para iconos */
+.fa-2x {
+    transition: var(--transition);
+}
+
+.contact-item:hover .fa-2x {
+    transform: scale(1.2) rotate(5deg);
+}
+
+/* ============================================
+   FOOTER
+   ============================================ */
+.footer {
+    background: linear-gradient(135deg, var(--dark-color), #000);
+    border-top: 3px solid var(--primary-color);
+}
+
+/* ============================================
+   RESPONSIVE DESIGN
+   ============================================ */
+@media (max-width: 768px) {
+    .masthead-heading {
         font-size: 2rem;
-        margin-top: 15px;
     }
     
-    .main-nav ul {
-        flex-direction: column;
-        gap: 10px;
-        width: 100%;
-    }
-    
-    .main-nav a {
-        display: block;
-        text-align: center;
-        padding: 12px;
-    }
-    
-    /* About section responsive */
-    .about-content {
-        flex-direction: column;
-        text-align: center;
-        gap: 30px;
-    }
-    
-    .profile-image {
-        width: 150px;
-        height: 150px;
-        margin: 0 auto;
-    }
-    
-    .about-text h2 {
-        font-size: 1.8rem;
-    }
-    
-    .about-description {
-        padding: 20px;
+    .masthead-subheading {
         font-size: 1rem;
     }
     
-    /* Table responsive */
-    .table-container {
-        overflow-x: auto;
+    .page-section-heading {
+        font-size: 2rem;
     }
     
-    .projects-table {
-        min-width: 500px;
+    .btn-audio-control {
+        width: 50px;
+        height: 50px;
+        font-size: 1.2rem;
+        bottom: 20px;
+        right: 20px;
     }
     
-    .projects-table th,
-    .projects-table td {
-        padding: 12px;
+    .page-section {
+        padding: 50px 0;
+    }
+    
+    .table-responsive {
         font-size: 0.9rem;
     }
-    
-    /* Contact form responsive */
-    .contact-wrapper {
-        flex-direction: column;
-        gap: 20px;
+}
+
+@media (max-width: 576px) {
+    .masthead {
+        padding-top: 60px;
+        padding-bottom: 60px;
     }
     
-    .contact-form-container {
-        padding: 25px;
+    .masthead-avatar {
+        width: 150px !important;
+        height: 150px !important;
     }
     
-    .contact-info h2 {
-        font-size: 1.8rem;
-        text-align: center;
+    .divider-custom .divider-custom-line {
+        max-width: 4rem;
     }
     
-    /* General responsive */
-    #sobre-mi,
-    #proyectos,
-    #contacto {
-        padding: 40px 0;
-        margin: 20px 0;
+    .contact-item {
+        font-size: 0.9rem;
     }
-    
-    .container {
-        padding: 0 15px;
-    }
-    
-    h2 {
-        font-size: 1.8rem !important;
-    }
+}
+
+/* ============================================
+   SCROLL SUAVE Y EFECTOS
+   ============================================ */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--light-color);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--primary-color);
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--secondary-color);
+}
+
+/* ============================================
+   UTILIDADES ADICIONALES
+   ============================================ */
+.shadow-lg {
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15) !important;
+}
+
+.text-primary {
+    color: var(--primary-color) !important;
+}
+
+.bg-primary {
+    background-color: var(--primary-color) !important;
+}
+
+.border-primary {
+    border-color: var(--primary-color) !important;
 }
